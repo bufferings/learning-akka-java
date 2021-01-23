@@ -2,6 +2,8 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'application'
 
+sourceCompatibility = JavaVersion.VERSION_15
+targetCompatibility = JavaVersion.VERSION_15
 
 repositories {
     mavenCentral()
@@ -9,14 +11,23 @@ repositories {
 }
 
 dependencies {
-  compile 'com.typesafe.akka:akka-actor-typed_2.13:2.6.11'
-  compile 'ch.qos.logback:logback-classic:1.2.3'
-  testCompile 'com.typesafe.akka:akka-actor-testkit-typed_2.13:2.6.11'
-  testCompile 'junit:junit:4.13.1'
+    compile 'com.typesafe.akka:akka-actor-typed_2.13:2.6.11'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+    testCompile 'com.typesafe.akka:akka-actor-testkit-typed_2.13:2.6.11'
+    testCompile 'junit:junit:4.13.1'
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs += ['--enable-preview']
 }
 
 mainClassName = "com.example.AkkaQuickstart"
 
 run {
-  standardInput = System.in
+    jvmArgs = ['--enable-preview']
+    standardInput = System.in
+}
+
+test {
+    jvmArgs = ['--enable-preview']
 }

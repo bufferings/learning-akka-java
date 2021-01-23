@@ -15,6 +15,7 @@ public class AkkaQuickstart {
 
     try {
       System.out.println(">>> Press ENTER to exit <<<");
+      //noinspection ResultOfMethodCallIgnored
       System.in.read();
     } catch (IOException ignored) {
     } finally {
