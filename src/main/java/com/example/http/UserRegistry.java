@@ -64,26 +64,25 @@ public class UserRegistry extends AbstractBehavior<UserRegistry.Command> {
     // We must be careful not to send out users since it is mutable
     // so for this response we need to make a defensive copy
     command.replyTo().tell(new Users(List.copyOf(users)));
-//    command.replyTo.tell(new Users(Collections.unmodifiableList(new ArrayList<>(users))));
     return this;
   }
 
   private Behavior<Command> onCreateUser(CreateUser command) {
     users.add(command.user());
-    command.replyTo().tell(new ActionPerformed(String.format("User %s created.", command.user().name)));
+    command.replyTo().tell(new ActionPerformed(String.format("User %s created.", command.user().name())));
     return this;
   }
 
   private Behavior<Command> onGetUser(GetUser command) {
     Optional<User> maybeUser = users.stream()
-        .filter(user -> user.name.equals(command.name()))
+        .filter(user -> user.name().equals(command.name()))
         .findFirst();
     command.replyTo().tell(new GetUserResponse(maybeUser));
     return this;
   }
 
   private Behavior<Command> onDeleteUser(DeleteUser command) {
-    users.removeIf(user -> user.name.equals(command.name()));
+    users.removeIf(user -> user.name().equals(command.name()));
     command.replyTo().tell(new ActionPerformed(String.format("User %s deleted.", command.name())));
     return this;
   }
