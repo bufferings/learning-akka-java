@@ -41,11 +41,10 @@ public class UserRoutes {
     scheduler = system.scheduler();
     askTimeout = system.settings().config().getDuration("my-app.routes.ask-timeout");
 
-    if (system.classicSystem() instanceof ExtendedActorSystem extendedActorSystem) {
-      objectMapper = new JacksonObjectMapperProvider(extendedActorSystem).getOrCreate("akka-http", Optional.empty());
-    } else {
+    if (!(system.classicSystem() instanceof ExtendedActorSystem extendedActorSystem)) {
       throw new IllegalArgumentException("Failed to get object mapper.");
     }
+    objectMapper = new JacksonObjectMapperProvider(extendedActorSystem).getOrCreate("akka-http", Optional.empty());
   }
 
   private CompletionStage<UserRegistry.GetUserResponse> getUser(String name) {
