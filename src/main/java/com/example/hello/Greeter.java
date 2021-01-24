@@ -1,4 +1,4 @@
-package com.example;
+package com.example.hello;
 
 import akka.actor.typed.ActorRef;
 import akka.actor.typed.Behavior;
@@ -7,12 +7,13 @@ import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
 
-// #greeter
 public class Greeter extends AbstractBehavior<Greeter.Greet> {
 
-  public record Greet (String whom, ActorRef<Greeted> replyTo) {}
+  public record Greet(String whom, ActorRef<Greeted> replyTo) {
+  }
 
-  public record Greeted (String whom, ActorRef<Greet> from) {}
+  public record Greeted(String whom, ActorRef<Greet> from) {
+  }
 
   public static Behavior<Greet> create() {
     return Behaviors.setup(Greeter::new);
@@ -35,5 +36,3 @@ public class Greeter extends AbstractBehavior<Greeter.Greet> {
     return this;
   }
 }
-// #greeter
-

@@ -1,8 +1,9 @@
-package com.example;
+package com.example.hello;
 
 import akka.actor.typed.ActorSystem;
 
 import java.io.IOException;
+
 public class AkkaQuickstart {
   public static void main(String[] args) {
     //#actor-system
