@@ -9,8 +9,7 @@ import akka.actor.typed.javadsl.Receive;
 
 public class GreeterMain extends AbstractBehavior<GreeterMain.SayHello> {
 
-  public record SayHello(String name) {
-  }
+  public record SayHello(String name) {}
 
   private final ActorRef<Greeter.Greet> greeter;
 

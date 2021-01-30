@@ -13,32 +13,23 @@ import java.util.Optional;
 
 public class UserRegistry extends AbstractBehavior<UserRegistry.Command> {
 
-  interface Command {
-  }
+  interface Command {}
 
-  public record GetUsers(ActorRef<Users> replyTo) implements Command {
-  }
+  public record GetUsers(ActorRef<Users> replyTo) implements Command {}
 
-  public record CreateUser(User user, ActorRef<ActionPerformed> replyTo) implements Command {
-  }
+  public record CreateUser(User user, ActorRef<ActionPerformed> replyTo) implements Command {}
 
-  public record GetUserResponse(Optional<User> maybeUser) {
-  }
+  public record GetUserResponse(Optional<User> maybeUser) {}
 
-  public record GetUser(String name, ActorRef<GetUserResponse> replyTo) implements Command {
-  }
+  public record GetUser(String name, ActorRef<GetUserResponse> replyTo) implements Command {}
 
-  public record DeleteUser(String name, ActorRef<ActionPerformed> replyTo) implements Command {
-  }
+  public record DeleteUser(String name, ActorRef<ActionPerformed> replyTo) implements Command {}
 
-  public record ActionPerformed(String description) implements Command {
-  }
+  public record ActionPerformed(String description) implements Command {}
 
-  public record User(String name, int age, String countryOfResidence) {
-  }
+  public record User(String name, int age, String countryOfResidence) {}
 
-  public record Users(List<User> users) {
-  }
+  public record Users(List<User> users) {}
 
   private final List<User> users = new ArrayList<>();
 

@@ -9,11 +9,9 @@ import akka.actor.typed.javadsl.Receive;
 
 public class Greeter extends AbstractBehavior<Greeter.Greet> {
 
-  public record Greet(String whom, ActorRef<Greeted> replyTo) {
-  }
+  public record Greet(String whom, ActorRef<Greeted> replyTo) {}
 
-  public record Greeted(String whom, ActorRef<Greet> from) {
-  }
+  public record Greeted(String whom, ActorRef<Greet> from) {}
 
   public static Behavior<Greet> create() {
     return Behaviors.setup(Greeter::new);
